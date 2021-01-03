@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+    <meta charset="UTF-8">
+    <title>ML API</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <button type="button" class="round-button" onclick="goBack()">⬅</button>
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+    </script>
+ <div class="login">
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{url_for('predict_rf_model_feature_10_batch_files')}}" method="POST" enctype="multipart/form-data">
+        <center>
+        <div class="custom-file">
+        <table>
+            <tr>
+                <td align="right"><b>Path : </b></td><td><input type="text" required="required" name="path" id="path"></td>
+            </tr>
+        </table>
+        <br>
+        <button type="submit" class="btn">Submit</button>
+            <br> <br>
+        </center>
+    </form>
+   <br>
+   <br>
+ </div>
+
+
+</body>
+</html>

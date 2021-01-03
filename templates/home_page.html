@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>ML API</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+ <div class="container">
+
+     <center>
+	<h1>Select the type of input data</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+   <br><br><br><br>
+   <br>
+    <div class="box">
+        <form action="{{url_for('home_type')}}" method="POST">
+           <select name="input_type" id="input_type" required="required" >
+
+               <option hidden="hidden">Choose Input Type</option>
+               <option value="Single_Data">Enter Student Details</option>
+               <option value="Single_File">Upload Single File</option>
+               <option value="Batch_Files">Upload Batch Files Path</option>
+
+           </select>
+           <br><br>
+           <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+     </center>
+ </div>
+
+</body>
+<br>
+</html>
