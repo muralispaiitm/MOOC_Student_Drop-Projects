@@ -12,10 +12,19 @@ class Database:
         except Exception as ex:
             print(ex)
 
-    # To add new row
+    # To update the record
     def update_record(self, df):
-        record = df.to_dict(orient='records')[0]
+        input_record = df.to_dict(orient='records')[0]
+        # ----------- Verifying the above record is existing in the database --------------
+        for rec in self.collectionT.find():
+            if list(input_record.values()) == list(rec.values())[1:]:
+                message = f"Record is already presenting in the database at {list(rec.values())[0]}"
+                return message
+
+        # -------- Inserting the above record into database if it is not presenting in the database -------
+        countOfrecords = self.collectionT.find().count()  # Finding number of records
+        record = {"_id": countOfrecords+1}
+        record.update(input_record)
         self.collectionT.insert_one(record)     # Inserting Record
-        countOfrecords = self.collectionT.find().count()    # Finding number of records
-        message = f"Record is successfully inserted at place {countOfrecords}"  # Sending Message
+        message = f"Record is successfully inserted at place {countOfrecords+1}"  # Sending Message
         return message
