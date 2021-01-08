@@ -116,8 +116,7 @@ def predict_rf_model_feature_10_single_file():
 @app.route("/predict_rf_model_feature_10_batch_files", methods=["POST"])
 def predict_rf_model_feature_10_batch_files():
     # Loading the path from the source
-    # path = os.getcwd() + "/MOOC_Student_Drop-Projects/Data/Batch_File/"
-    MyCsvDir = request.form['path']
+    MyCsvDir = os.getcwd() + request.form['path']    # Input Path: "Data/Batch_Files/Predicting_Files/"
     CsvFiles = glob(os.path.join(MyCsvDir, '*.csv'))
     skipped_files = []
     predicted_files = []
