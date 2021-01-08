@@ -84,7 +84,7 @@ def predict_rf_model_feature_10_single_data():
 def predict_rf_model_feature_10_single_file():
 
     # ------------------- Loading the data frame from and save in specific path -------------------
-    path = os.getcwd() + "/MOOC_Student_Drop-Projects/Data/Single_File/"
+    path = os.getcwd() + "Data/Single_File/"
     in_file = request.files['in_file']
     in_file.save(os.path.join(path, in_file.filename))
 
