@@ -82,16 +82,17 @@ def predict_rf_model_feature_10_single_data():
 
 @app.route("/predict_rf_model_feature_10_single_file", methods=["POST"])
 def predict_rf_model_feature_10_single_file():
+    
+    # -------------------------------- Loading the path from the source --------------------------------
+    path = os.getcwd() + "/Data/Single_File/"  # For Cloud deployment
+    # path = "C:\\Users\pc\Desktop\Data science\02 INEURON\Projects\S_Dropout\Data\Single_File"   # For Local Deployment
 
     # ------------------- Loading the data frame from and save in specific path -------------------
-    path = os.getcwd() + "Data/Single_File/"
     in_file = request.files['in_file']
     in_file.save(os.path.join(path, in_file.filename))
 
     # ---------------------- Loading data from specific path into data frame ----------------------
     df = pd.read_csv(os.path.join(path, in_file.filename))
-    # path = "C:\\Users\pc\Desktop\Data science\02 INEURON\Projects\S_Dropout\Data\Single_File"
-    # path = "https://github.com/muralispaiitm/MOOC_Student_Drop-Projects/tree/main/Data/Single_File"
 
     # ---------------------------------------------------------------------------------------------
     if df.columns[-1]=='result':
@@ -116,18 +117,19 @@ def predict_rf_model_feature_10_single_file():
 @app.route("/predict_rf_model_feature_10_batch_files", methods=["POST"])
 def predict_rf_model_feature_10_batch_files():
     # Loading the path from the source
-    MyCsvDir = os.getcwd() + request.form['path']    # Input Path: "Data/Batch_Files/Predicting_Files/"
-    CsvFiles = glob(os.path.join(MyCsvDir, '*.csv'))
+    MyCsvDir = os.getcwd() + request.form['path']       # Input Path: "/Data/Batch_Files/Predicting_Files/"
+    CsvFiles = glob(os.path.join(MyCsvDir, '*.csv'))    # Get all CSV files including paths
     skipped_files = []
     predicted_files = []
+    # Extracting files one-by-one and predicting
     for i in range(len(CsvFiles)):
         df = pd.read_csv(CsvFiles[i])   # Creating Data Frame
                      # Calling function for predicting
-        # file_name =  CsvFiles[i].split(MyCsvDir)[1]
+        file_name =  CsvFiles[i].split(MyCsvDir)[1]
         if df.columns[-1] == 'result':
-            skipped_files.append(CsvFiles[i].split(MyCsvDir)[1])
+            skipped_files.append(file_name)
         else:
-            predicted_files.append(CsvFiles[i].split(MyCsvDir)[1])
+            predicted_files.append(file_name)
             X = df.copy()  # Copying Input values for purpose of exporting into MongoDB
             cols = ['start_date', 'end_date', 'access', 'discussion', 'navigate', 'page_close', 'problem', 'video', 'wiki']
             df = df[cols]
@@ -138,9 +140,10 @@ def predict_rf_model_feature_10_batch_files():
             # -------------------------- Predicting the result --------------------------
             X['result'] = predict_df(df)
             # ----------------------- Storing the resultant files -----------------------
-            X.to_csv(CsvFiles[i], index=False)
+            files_store_path = os.getcwd()+'/Data/Batch_Files/Predicting_Files/'
+            X.to_csv(files_store_path+file_name, index=False)
 
-    return render_template("result_page.html", result=f"Skipped Files: {skipped_files} \n Predicted Files: {predicted_files}", path=MyCsvDir)
+    return render_template("result_page.html", result=f"Skipped Files: {skipped_files} \n Predicted Files: {predicted_files}", path=files_store_path)
 
 # Function to predict the result for one data frame ---------------------------------------------
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
