@@ -8,14 +8,16 @@
 </head>
 
 <body>
-    <button type="button" class="round-button" onclick="goBack()">⬅</button>
+
+    <button type="button "class="round-button"><a style="text-decoration:none" ; href="/" ><</a></a></button>
     <script>
         function goBack() {
           window.history.back();
         }
     </script>
- <div class="login">
-
+<br><br><br><br><br><br>
+ <div class="container">
+    <center>   <h1>Submit Multiple files</h1>    </center>
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{url_for('predict_rf_model_feature_10_batch_files')}}" method="POST" enctype="multipart/form-data">
         <center>

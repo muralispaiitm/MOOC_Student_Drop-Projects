@@ -8,19 +8,17 @@
 </head>
 
 <body>
-    <button type="button" class="round-button" onclick="goBack()">⬅</button>
+    <button type="button "class="round-button"><a style="text-decoration:none"; href="/" ><</a></a></button>
     <script>
         function goBack() {
           window.history.back();
         }
     </script>
-    <center>
-        <h1>Student Churn Analysis</h1><br>
-    </center>
- <div class="login">
+    <div class="container"><center><h1>Student Churn Analysis</h1><br></center></div>
+ <div class="container">
 
      <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{url_for('predict_rf_model_feature_10_single_data')}}" method="POST">
+    <form action="{{ url_for('predict_rf_model_feature_10_single_data')}}" method="POST">
         <center>
             <br>
         <table>
