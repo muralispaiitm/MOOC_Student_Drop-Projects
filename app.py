@@ -84,7 +84,7 @@ def predict_rf_model_feature_10_single_data():
 def predict_rf_model_feature_10_single_file():
 
     # ------------------- Loading the data frame from and save in specific path -------------------
-    path = os.getcwd() + "/Data/Single_File/"
+    path = os.getcwd() + "/MOOC_Student_Drop-Projects/Data/Single_File/"
     in_file = request.files['in_file']
     in_file.save(os.path.join(path, in_file.filename))
 
@@ -116,7 +116,7 @@ def predict_rf_model_feature_10_single_file():
 @app.route("/predict_rf_model_feature_10_batch_files", methods=["POST"])
 def predict_rf_model_feature_10_batch_files():
     # Loading the path from the source
-    # path = os.getcwd() + "/Data/Batch_File/"
+    # path = os.getcwd() + "/MOOC_Student_Drop-Projects/Data/Batch_File/"
     MyCsvDir = request.form['path']
     CsvFiles = glob(os.path.join(MyCsvDir, '*.csv'))
     skipped_files = []
