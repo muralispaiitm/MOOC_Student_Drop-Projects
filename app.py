@@ -84,8 +84,9 @@ def predict_rf_model_feature_10_single_data():
 def predict_rf_model_feature_10_single_file():
     
     # -------------------------------- Loading the path from the source --------------------------------
-    path = os.getcwd() + "/Data/Single_File/"  # For Cloud deployment
+    # path = os.getcwd() + "/Data/Single_File/"  # For Cloud deployment
     # path = "C:\\Users\pc\Desktop\Data science\02 INEURON\Projects\S_Dropout\Data\Single_File"   # For Local Deployment
+    path = "C:\Users\mural\OneDrive\Documents\GitHub\MOOC_Student_Drop-Projects\Data\Single_File"
 
     # ------------------- Loading the data frame from and save in specific path -------------------
     in_file = request.files['in_file']
@@ -140,7 +141,8 @@ def predict_rf_model_feature_10_batch_files():
             # -------------------------- Predicting the result --------------------------
             X['result'] = predict_df(df)
             # ----------------------- Storing the resultant files -----------------------
-            files_store_path = os.getcwd()+'/Data/Batch_Files/Predicting_Files/'
+            # files_store_path = os.getcwd()+'/Data/Batch_Files/Predicting_Files/'
+            files_store_path = "C:\Users\mural\OneDrive\Documents\GitHub\MOOC_Student_Drop-Projects\Data\Batch_Files\Predicting_Files"
             X.to_csv(files_store_path+file_name, index=False)
 
     return render_template("result_page.html", result=f"Skipped Files: {skipped_files} \n Predicted Files: {predicted_files}", path=files_store_path)
