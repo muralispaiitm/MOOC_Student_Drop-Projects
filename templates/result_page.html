@@ -7,23 +7,61 @@
 </head>
 
 <body>
+<div class="container"><center><h1>MOOC Students Dropout Prediction</h1><br></center></div>
 <center>
-    <div class="container" align="center">
+  <div class="container">
+      <form action="/">
+          <center>
+            <table align="centre">
+                <! For single record ============================= >
+                {% if type == "single_data" %}
+                <tr>
+                    <th align="right">Student dropped? : </th>
+                    <td align="left">{{result}}</td>
+                </tr>
+                {% endif %}
 
-	<h1>Student dropped?</h1>
+                <! For single file ============================= >
+                {% if type == "single_file" %}
+                <tr>
+                    <th align="right">File Name : </th>
+                    <td align="left">{{file_name}}</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <th align="right">Result : </th>
+                    <td align="left">{{result}}</td>
+                </tr>
+                {% endif %}
 
-     <!-- Main Input For Receiving Query to our ML -->
-   <br><br>
-        {{ result }}
-   <br><br>
-        {{DbMessage}}
-   <br><br>
-        File Location: {{path}}
-   <br><br>
-    <div>
-        <button type="button " class="hone"> <a style="text-decoration:none" href="/" >🏠</a> </button>
-    </div>
- </div>
+                <! For Batch files ============================= >
+                {% if type == "batch_files" %}
+                <tr>
+                    <th align="right">Predicted Files : </th>
+                    <td align="left">{{predicted_files}}</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <th align="right">Skipped Files : </th>
+                    <td align="left">{{skipped_files}}</td>
+                </tr>
+                {% endif %}
+
+                <tr></tr>
+                <tr>
+                    <th align="right">DB Message : </th>
+                    <td align="left">{{DbMessage}}</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <th align="right">Storage Path : </th>
+                    <td align="left">{{path}}</td>
+                </tr>
+            </table>
+          </center>
+          <button type="button " class="hone"> 🏠 </button>
+      </form>
+  </div>
 </center>
 
 
