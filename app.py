@@ -86,7 +86,7 @@ def predict_rf_model_feature_10_single_file():
     # ------------------------------------ Extracting the Path ------------------------------------
     # current_path = os.getcwd() + "/Data/Single_File/"  # For Cloud deployment
     local_path = "C:\\Users\\mural\\OneDrive\\Documents\\GitHub\\MOOC_Student_Drop-Projects\\Data\\Single_File"   # For Local Deployment
-
+    
     # ------------------- Loading the data frame from and save in specific path -------------------
     in_file = request.files['in_file']
     file_name = in_file.filename
