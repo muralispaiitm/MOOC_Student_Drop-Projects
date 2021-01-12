@@ -18,7 +18,7 @@ class Database:
         # ----------- Verifying the above record is existing in the database --------------
         for rec in self.collectionT.find():
             if list(input_record.values()) == list(rec.values())[1:]:
-                message = f"Record is already presenting in the database at {list(rec.values())[0]}"
+                message = f"Record is already presenting in the database at index {list(rec.values())[0]}"
                 return message
 
         # -------- Inserting the above record into database if it is not presenting in the database -------

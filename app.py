@@ -75,31 +75,32 @@ def predict_rf_model_feature_10_single_data():
     else:
         result = "1 - Student will Drop from the course"
 
-    return render_template("result_page.html", result=result, DbMessage=DbMessage, path="None")
+    return render_template("result_page.html", type="single_data", result=result, DbMessage=DbMessage, path="MongoDB")
 
 # Using Single File : ---------------------------------------------------------------------------
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 @app.route("/predict_rf_model_feature_10_single_file", methods=["POST"])
 def predict_rf_model_feature_10_single_file():
-    
-    # -------------------------------- Loading the path from the source --------------------------------
+
+    # ------------------------------------ Extracting the Path ------------------------------------
     # path = os.getcwd() + "/Data/Single_File/"  # For Cloud deployment
-    # path = "C:\\Users\pc\Desktop\Data science\02 INEURON\Projects\S_Dropout\Data\Single_File"   # For Local Deployment
-    path = "C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Single_File"
+    path = r"C:\Users\mural\OneDrive\Documents\GitHub\MOOC_Student_Drop-Projects\Data\Single_File"   # For Local Deployment
 
     # ------------------- Loading the data frame from and save in specific path -------------------
     in_file = request.files['in_file']
-    in_file.save(os.path.join(path, in_file.filename))
+    file_name = in_file.filename
+    file_path = os.path.join(path, file_name)    # Location of the file stored
+    in_file.save(file_path)
 
     # ---------------------- Loading data from specific path into data frame ----------------------
-    df = pd.read_csv(os.path.join(path, in_file.filename))
+    df = pd.read_csv(file_path)
 
     # ---------------------------------------------------------------------------------------------
     if df.columns[-1]=='result':
-        return render_template("result_page.html", data="This data was already Predicted", path=path)
+        return render_template("result_page.html", result="This data was already Predicted", DbMessage='Not updated', path=path)
     else:
-        X = df.copy()  # Copying Input values for purpose of exporting into MongoDB
+        X = df.copy()  # Copying Input values for purpose of exporting into MongoDB or local drive
         cols = ['start_date', 'end_date', 'access', 'discussion', 'navigate', 'page_close', 'problem', 'video', 'wiki']
         df = df[cols]
         # -------------------------- Preprocessing the data --------------------------
@@ -109,8 +110,9 @@ def predict_rf_model_feature_10_single_file():
         # -------------------------- Predicting the result --------------------------
         X['result'] = predict_df(df)
         # ------------------ Storing the result into specific path ------------------
-        X.to_csv(os.path.join(path, in_file.filename), index=False)
-    return render_template("result_page.html", result="Successfully Predicted", path=path)
+        X.to_csv(file_path, index=False)
+
+    return render_template("result_page.html", type="single_file", file_name=file_name, result="Successfully Predicted", DbMessage='Locally stored', path=file_path)
 
 # Using Batch Files : ---------------------------------------------------------------------------
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -118,19 +120,21 @@ def predict_rf_model_feature_10_single_file():
 @app.route("/predict_rf_model_feature_10_batch_files", methods=["POST"])
 def predict_rf_model_feature_10_batch_files():
     # Loading the path from the source
-    MyCsvDir = os.getcwd() + request.form['path']       # Input Path: "/Data/Batch_Files/Predicting_Files/"
+    # MyCsvDir = os.getcwd() + request.form['path']       # Input Path: "/Data/Batch_Files/Predicting_Files/"
+    MyCsvDir = request.form['path']
     CsvFiles = glob(os.path.join(MyCsvDir, '*.csv'))    # Get all CSV files including paths
+
     skipped_files = []
     predicted_files = []
     # Extracting files one-by-one and predicting
     for i in range(len(CsvFiles)):
         df = pd.read_csv(CsvFiles[i])   # Creating Data Frame
                      # Calling function for predicting
-        file_name =  CsvFiles[i].split(MyCsvDir)[1]
+        file_name = os.path.split(CsvFiles[i])[1]
+        # CsvFiles[i].split(MyCsvDir)[1]
         if df.columns[-1] == 'result':
             skipped_files.append(file_name)
         else:
-            predicted_files.append(file_name)
             X = df.copy()  # Copying Input values for purpose of exporting into MongoDB
             cols = ['start_date', 'end_date', 'access', 'discussion', 'navigate', 'page_close', 'problem', 'video', 'wiki']
             df = df[cols]
@@ -141,11 +145,15 @@ def predict_rf_model_feature_10_batch_files():
             # -------------------------- Predicting the result --------------------------
             X['result'] = predict_df(df)
             # ----------------------- Storing the resultant files -----------------------
-            # files_store_path = os.getcwd()+'/Data/Batch_Files/Predicting_Files/'
-            files_store_path = "C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Single_File/Batch_Files/Predicting_Files"
-            X.to_csv(files_store_path+file_name, index=False)
+            predicted_files.append(file_name)
+            # files_store_path = os.getcwd() + '/Data/Batch_Files/Predicting_Files/'
+            path = r"C:\Users\mural\OneDrive\Documents\GitHub\MOOC_Student_Drop-Projects\Data\Batch_Files\Predicting_Files"
+            files_store_path = os.path.join(path, file_name)  # Location of the file stored
+            X.to_csv(files_store_path, index=False)
 
-    return render_template("result_page.html", result=f"Skipped Files: {skipped_files} \n Predicted Files: {predicted_files}", path=files_store_path)
+    return render_template("result_page.html", type="batch_files", skipped_files=skipped_files, predicted_files=predicted_files, DbMessage='Locally Stored', path=files_store_path)
+
+    #return render_template("result_page_test.html", result="Displaying Correct Path", DbMessage='Not updated', path=file_name)
 
 # Function to predict the result for one data frame ---------------------------------------------
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
