@@ -85,18 +85,14 @@ def predict_rf_model_feature_10_single_file():
 
     # ------------------------------------ Extracting the Path ------------------------------------
     # path = os.getcwd() + "/Data/Single_File/"  # For Cloud deployment
-    path = "C:\\Users\\mural\\OneDrive\\Documents\\GitHub\\MOOC_Student_Drop-Projects\\Data\\Single_File"   # For Local Deployment
-    
+    path = r"C:\Users\mural\OneDrive\Documents\GitHub\MOOC_Student_Drop-Projects\Data\Single_File"   # For Local Deployment
+
     # ------------------- Loading the data frame from and save in specific path -------------------
     in_file = request.files['in_file']
     file_name = in_file.filename
-    
     file_path = os.path.join(path, file_name)    # Location of the file stored
-    file_path1 = file_path.replace('/','\\')
-   
-'''
     in_file.save(file_path)
-    
+
     # ---------------------- Loading data from specific path into data frame ----------------------
     df = pd.read_csv(file_path)
 
@@ -115,9 +111,8 @@ def predict_rf_model_feature_10_single_file():
         X['result'] = predict_df(df)
         # ------------------ Storing the result into specific path ------------------
         X.to_csv(file_path, index=False)
+
     return render_template("result_page.html", type="single_file", file_name=file_name, result="Successfully Predicted", DbMessage='Locally stored', path=file_path)
-'''
-    return render_template("result_page.html", type="single_file", file_name=file_name, result=type(in_file), DbMessage=file_path, path=file_path1)
 
 # Using Batch Files : ---------------------------------------------------------------------------
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -128,7 +123,7 @@ def predict_rf_model_feature_10_batch_files():
     # MyCsvDir = os.getcwd() + request.form['path']       # Input Path: "/Data/Batch_Files/Predicting_Files/"
     MyCsvDir = request.form['path']
     CsvFiles = glob(os.path.join(MyCsvDir, '*.csv'))    # Get all CSV files including paths
-'''
+
     skipped_files = []
     predicted_files = []
     # Extracting files one-by-one and predicting
@@ -155,9 +150,10 @@ def predict_rf_model_feature_10_batch_files():
             path = r"C:\Users\mural\OneDrive\Documents\GitHub\MOOC_Student_Drop-Projects\Data\Batch_Files\Predicting_Files"
             files_store_path = os.path.join(path, file_name)  # Location of the file stored
             X.to_csv(files_store_path, index=False)
-'''
-    # return render_template("result_page.html", type="batch_files", skipped_files=skipped_files, predicted_files=predicted_files, DbMessage='Locally Stored', path=files_store_path)
-    return render_template("result_page.html", type="batch_files", skipped_files=MyCsvDir, predicted_files=CsvFiles[0], DbMessage='Locally Stored', path="None")
+
+    return render_template("result_page.html", type="batch_files", skipped_files=skipped_files, predicted_files=predicted_files, DbMessage='Locally Stored', path=files_store_path)
+
+    #return render_template("result_page_test.html", result="Displaying Correct Path", DbMessage='Not updated', path=file_name)
 
 # Function to predict the result for one data frame ---------------------------------------------
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
