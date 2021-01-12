@@ -149,8 +149,8 @@ def predict_rf_model_feature_10_batch_files():
             predicted_files.append(file_name)
             # files_store_path = os.getcwd() + '/Data/Batch_Files/Predicting_Files/'
             path = "C:\\Users\\mural\\OneDrive\\Documents\\GitHub\\MOOC_Student_Drop-Projects\\Data\\Batch_Files\\Predicting_Files"
-            file_store_path = os.path.join(path, file_name)  # Location of the file stored
-            file_store_path = file_store_path.replace('/', '\\')
+            file_store_path = os.path.join(path, file_name).replace('/', '\\')  # Location of the file stored
+            # file_store_path = file_store_path.replace('/', '\\')
             X.to_csv(file_store_path, index=False)
 
     return render_template("result_page.html", type="batch_files", skipped_files=skipped_files, predicted_files=predicted_files, DbMessage='Locally Stored', path=os.path.split(file_store_path)[0])
