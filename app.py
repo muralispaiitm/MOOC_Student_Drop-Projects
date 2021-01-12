@@ -112,7 +112,6 @@ def predict_rf_model_feature_10_single_file():
         X['result'] = predict_df(df)
         # ------------------ Storing the result into specific path ------------------
         X.to_csv(file_path, index=False)
-        X.save(file_path)
 
     return render_template("result_page.html", type="single_file", file_name=file_name, result="Successfully Predicted", DbMessage='Locally stored', path=local_path)
 
