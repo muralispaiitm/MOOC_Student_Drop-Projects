@@ -92,7 +92,8 @@ def predict_rf_model_feature_10_single_file():
     file_name = in_file.filename
     
     file_path = os.path.join(path, file_name)    # Location of the file stored
-    file_path = file_path.replace('/','\\')
+    file_path1 = file_path.replace('/','\\')
+   '''
     in_file.save(file_path)
     
     # ---------------------- Loading data from specific path into data frame ----------------------
@@ -113,8 +114,10 @@ def predict_rf_model_feature_10_single_file():
         X['result'] = predict_df(df)
         # ------------------ Storing the result into specific path ------------------
         X.to_csv(file_path, index=False)
-    
     return render_template("result_page.html", type="single_file", file_name=file_name, result="Successfully Predicted", DbMessage='Locally stored', path=file_path)
+    
+   '''
+    return render_template("result_page.html", type="single_file", file_name=file_name, result=type(in_file), DbMessage=file_path, path=file_path1)
 
 # Using Batch Files : ---------------------------------------------------------------------------
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
