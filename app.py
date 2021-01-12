@@ -85,13 +85,11 @@ def predict_rf_model_feature_10_single_file():
 
     # ------------------------------------ Extracting the Path ------------------------------------
     # path = os.getcwd() + "/Data/Single_File/"  # For Cloud deployment
-    # path = r"C:\Users\mural\OneDrive\Documents\GitHub\MOOC_Student_Drop-Projects\Data\Single_File"   # For Local Deployment
+    path = r"C:\Users\mural\OneDrive\Documents\GitHub\MOOC_Student_Drop-Projects\Data\Single_File"   # For Local Deployment
     
     # ------------------- Loading the data frame from and save in specific path -------------------
     in_file = request.files['in_file']
     file_name = in_file.filename
-    sys_detials = os.environ
-    curr_dir = os.getcwd()
     '''
     file_path = os.path.join(path, file_name)    # Location of the file stored
     in_file.save(file_path)
@@ -116,7 +114,7 @@ def predict_rf_model_feature_10_single_file():
         X.to_csv(file_path, index=False)
     '''
     # return render_template("result_page.html", type="single_file", file_name=file_name, result="Successfully Predicted", DbMessage='Locally stored', path=file_path)
-    return render_template("result_page.html", type="single_file", file_name=file_name, result=sys_detials, DbMessage=curr_dir, path="None")
+    return render_template("result_page.html", type="single_file", file_name=file_name, result=sys_detials, DbMessage=curr_dir, path=path)
 
 # Using Batch Files : ---------------------------------------------------------------------------
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
