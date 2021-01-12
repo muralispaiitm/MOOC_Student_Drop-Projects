@@ -114,7 +114,7 @@ def predict_rf_model_feature_10_single_file():
         X.to_csv(file_path, index=False)
     '''
     # return render_template("result_page.html", type="single_file", file_name=file_name, result="Successfully Predicted", DbMessage='Locally stored', path=file_path)
-    return render_template("result_page.html", type="single_file", file_name=file_name, result=sys_detials, DbMessage=curr_dir, path=path)
+    return render_template("result_page.html", type="single_file", file_name=file_name, result="Successfully Predicted", DbMessage='Locally stored', path=path)
 
 # Using Batch Files : ---------------------------------------------------------------------------
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
