@@ -171,7 +171,6 @@ def predict_single_file():
         # ---------------------------- Finding the result ----------------------------
         resultStatus["Result"] = "File is Successfully Predicted"
         resultStatus["sampleData"] = X.copy()
-        resultStatus["Download_File"] = file_path
 
         # ---------------------------- Displaying the output ----------------------------
         return render_template("result_page.html", type="single_file", resultStatus=resultStatus)
@@ -240,7 +239,6 @@ def predict_batch_files():
             if Current_Dir_Update == "yes":
                 file_store_path = os.path.join(resultStatus["Files_Stored_Path"], file_name)  # Location of the file stored
                 X.to_csv(file_store_path, index=False)
-                resultStatus["sampleData"] = X.copy()
 
     else:
         resultStatus["Predicted_Files"] = predicted_files
