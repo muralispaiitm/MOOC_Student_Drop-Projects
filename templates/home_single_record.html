@@ -13,13 +13,12 @@
     <script> function goBack() { window.history.back();} </script>
 
     <! Title Name  --------------------------------------- >
-        <div class="container"><center><h1> Student Churn Analysis </h1><br></center></div>
+        <div class="container"><center><h1> Student Churn Analysis </h1></center></div>
 
     <! Asking user to enter student details  --------------------------------------- >
     <div class="container">
         <form action="{{ url_for('predict_single_data')}}" method="POST">
             <center>
-                <br>
                 <! Table_01 Starts  --------------------------------------- >
                 <table>
                     <! 1nd row ----------- >
@@ -80,7 +79,6 @@
                 <button type="submit" class="btn">Predict</button>
             </center>
         </form>
-       <br><br>
     </div>
 </body>
 </html>
