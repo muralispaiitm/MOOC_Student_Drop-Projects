@@ -91,7 +91,6 @@
                     <td> {{resultStatus["sampleData"].loc[i,"result"]}} </td>
                 </tr>
                 {% endfor %}
-                <tr><td><a href="/Data/Single_File/X_test1.csv" download></td></tr>
             </table>
         </center>
         {% endif %}
@@ -128,7 +127,7 @@
         {% endif %}
 
         <br>
-        <p> Download File <a href="/Data/Single_File/X_test1.csv" download> Click Here</a></p>
+        <p> Download File <a href={{resultStatus["Download_File"]}} download> Click Here</a></p>
         <br>
 
     <button type="button" class="hone"><a href="/"> 🏠 </a> </button>
