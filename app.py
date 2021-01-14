@@ -171,6 +171,7 @@ def predict_single_file():
         # ---------------------------- Finding the result ----------------------------
         resultStatus["Result"] = "File is Successfully Predicted"
         resultStatus["sampleData"] = X.copy()
+        resultStatus["Download_File"] = file_path
 
         # ---------------------------- Displaying the output ----------------------------
         return render_template("result_page.html", type="single_file", resultStatus=resultStatus)
