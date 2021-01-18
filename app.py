@@ -127,8 +127,16 @@ def predict_single_file():
 
     # ---------------------- Creating a Data frame directly from input file  ----------------------
     df = pd.read_csv(FileStorage(in_file).stream)
-    file_path = r"C:\Users\mural\OneDrive\Documents\GitHub\MOOC_Student_Drop-Projects\Data\Single_File"
+    
+    # Modification to be deleted ----------------------------------------------------------
+    file_path = r"C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Single_File/"
     in_file.save(file_path)
+    URL = r"D:\DataScience\02 INEURON\ML_Projects\Intership (iNeuron)\Projects\ml_education\student_dropout\Data\Single_File\X_test1.csv"
+    with open(URL, "r+") as ReadFile:
+        ReadLines = ReadFile.readlines()
+    resultStatus["Files_Stored_Path"] = ReadLines[0]
+    # End of Modification ------------------------------------------------------------------
+    
     # df = pd.read_csv(file_path)
 
     # ------------------ Verifying the incoming file was already predicted or not ------------------
