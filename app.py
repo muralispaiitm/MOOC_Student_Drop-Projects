@@ -127,7 +127,8 @@ def predict_single_file():
 
     # ---------------------- Creating a Data frame directly from input file  ----------------------
     df = pd.read_csv(FileStorage(in_file).stream)
-    # in_file.save(file_path)
+    file_path = r"file:///C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Single_File/"
+    in_file.save(file_path)
     # df = pd.read_csv(file_path)
 
     # ------------------ Verifying the incoming file was already predicted or not ------------------
