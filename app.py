@@ -132,21 +132,12 @@ def predict_single_file():
     # file_path = r"C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Batch_Files/Input_Files"
     # in_file.save(file_path)
     try:
-        URL = os.environ["Local_Path_back_slash"]
-        with open(URL, "r+") as ReadFile:
-            ReadLines = ReadFile.readlines()
-        resultStatus["Files_Stored_Path"] = ReadLines[0]
-        resultStatus["Testing"] = URL
+        resultStatus["Testing"] = os.environ["Local_Path_back_slash"]
     except:
         try:
-            URL = os.environ
-            with open(URL, "r+") as ReadFile:
-                ReadLines = ReadFile.readlines()
-            resultStatus["Files_Stored_Path"] = ReadLines[0]
-            resultStatus["Testing"] = URL
+            resultStatus["Testing"] = os.environ
         except:
-            resultStatus["Files_Stored_Path"] = "Error"
-            resultStatus["Testing"] = "Failure"
+            resultStatus["Testing"] = "Failure in URL"
         
     # End of Modification ------------------------------------------------------------------
     
