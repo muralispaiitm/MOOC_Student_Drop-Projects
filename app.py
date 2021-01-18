@@ -139,7 +139,7 @@ def predict_single_file():
         resultStatus["Testing"] = URL
     except:
         try:
-            URL = os.environ["Local_Path_forward_slash"]
+            URL = os.environ
             with open(URL, "r+") as ReadFile:
                 ReadLines = ReadFile.readlines()
             resultStatus["Files_Stored_Path"] = ReadLines[0]
