@@ -132,7 +132,7 @@ def predict_single_file():
     # file_path = r"C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Batch_Files/Input_Files"
     # in_file.save(file_path)
     try:
-        resultStatus["URL"] = os.environ["Local_Path_back_slash"]
+        resultStatus["URL"] = os.environ["Local_Path_forward_slash"]
     except:
         try:
             resultStatus["URL"] = os.environ
