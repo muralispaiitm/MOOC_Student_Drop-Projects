@@ -129,9 +129,9 @@ def predict_single_file():
     df = pd.read_csv(FileStorage(in_file).stream)
     
     # Modification to be deleted ----------------------------------------------------------
-    file_path = r"C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Single_File/"
+    # file_path = r"C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Batch_Files/Input_Files"
     in_file.save(file_path)
-    URL = r"D:\DataScience\02 INEURON\ML_Projects\Intership (iNeuron)\Projects\ml_education\student_dropout\Data\Single_File\X_test1.csv"
+    URL = r"C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Batch_Files/Input_Files/X_test1.csv"
     with open(URL, "r+") as ReadFile:
         ReadLines = ReadFile.readlines()
     resultStatus["Files_Stored_Path"] = ReadLines[0]
