@@ -132,21 +132,21 @@ def predict_single_file():
     # file_path = r"C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Batch_Files/Input_Files"
     # in_file.save(file_path)
     try:
-        URL = r"C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Batch_Files/Input_Files/X_test1.csv"
+        URL = os.environ["Local_Path_back_slash"]
         with open(URL, "r+") as ReadFile:
             ReadLines = ReadFile.readlines()
         resultStatus["Files_Stored_Path"] = ReadLines[0]
         resultStatus["Testing"] = URL
     except:
         try:
-            URL = r"C:\Users\mural\OneDrive\Documents\GitHub\MOOC_Student_Drop-Projects\Data\Batch_Files\Input_Files\X_test1.csv"
+            URL = os.environ["Local_Path_forward_slash"]
             with open(URL, "r+") as ReadFile:
                 ReadLines = ReadFile.readlines()
             resultStatus["Files_Stored_Path"] = ReadLines[0]
             resultStatus["Testing"] = URL
         except:
             resultStatus["Files_Stored_Path"] = "Error"
-            resultStatus["Testing"] = "Success"
+            resultStatus["Testing"] = "Failure"
         
     # End of Modification ------------------------------------------------------------------
     
