@@ -132,12 +132,23 @@ def predict_single_file():
     # file_path = r"C:/Users/mural/OneDrive/Documents/GitHub/MOOC_Student_Drop-Projects/Data/Batch_Files/Input_Files"
     # in_file.save(file_path)
     try:
-        resultStatus["Testing"] = os.environ["Local_Path_back_slash"]
+        resultStatus["URL"] = os.environ["Local_Path_back_slash"]
     except:
         try:
-            resultStatus["Testing"] = os.environ
+            resultStatus["URL"] = os.environ
         except:
-            resultStatus["Testing"] = "Failure in URL"
+            resultStatus["URL"] = "Failure in URL"
+    try:
+        in_file.save(resultStatus["URL"])
+        resultStatus["URL"] = resultStatus["URL"] + " --> File Saved Successfully"
+    except:
+        resultStatus["URL"] = resultStatus["URL"] + " --> Error in Saving"
+     
+    try:
+        df = pd.read_csv(resultStatus["URL"])
+        resultStatus["URL"] = resultStatus["URL"] + " --> DF Created"
+    except:
+        resultStatus["URL"] = resultStatus["URL"] + " --> Error in Creating DF"
         
     # End of Modification ------------------------------------------------------------------
     
