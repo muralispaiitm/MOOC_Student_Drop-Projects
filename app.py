@@ -127,6 +127,9 @@ def predict_single_file():
 
     # ---------------------- Creating a Data frame directly from input file  ----------------------
     df = pd.read_csv(FileStorage(in_file).stream)
+    
+    ''' No need this code
+    =============================
     resultStatus["URL"] = os.environ["Local_Path_forward_slash"]
     try:
         in_file.save(resultStatus["URL"])
@@ -139,6 +142,7 @@ def predict_single_file():
         resultStatus["URL"] = resultStatus["URL"] + " --> DF Created"
     except:
         resultStatus["URL"] = resultStatus["URL"] + " --> Error in Creating DF"
+    '''
 
     # ------------------ Verifying the incoming file was already predicted or not ------------------
     if df.columns[-1]=='result':
